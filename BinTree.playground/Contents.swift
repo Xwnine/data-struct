@@ -24,7 +24,7 @@ class TreeNode {
     }
 }
 
-class Tree {
+class BinTree {
     //指向根节点的指针
     var root: TreeNode?
 	fileprivate var index: Int = -1
@@ -131,19 +131,6 @@ class Tree {
 		postOrderTraversal(tree: node.right)
 		print(node.data)
 	}
-	
-//	//层序遍历
-//	func levelOrderTranversal(tree: TreeNode?) {
-//		guard let node = tree else {
-//			print("树为空")
-//			return
-//		}
-//		print(node.data)
-//		print(node.left?.data)
-//		print(node.right?.data)
-//		levelOrderTranversal(tree: node.left)
-//		levelOrderTranversal(tree: node.right)
-//	}
 }
 
 //堆栈 LIFO
@@ -192,7 +179,7 @@ struct Queue<T> {
 
 
 //非递归的方法实现树的遍历
-extension Tree {
+extension BinTree {
 	//根、左、右
 	func proPreOrderTraversal(tree: TreeNode?) {
 		guard let _ = tree else {
@@ -267,10 +254,9 @@ extension Tree {
 		var queue = Queue<TreeNode>()
 		//首先将根节点入队列
 		queue.enqueue(tree!)
-		while !queue.isEmpty  { //队列不为空
+		while !queue.isEmpty { //队列不为空
 			//节点出队列
 			let temp = queue.dequeue()
-			
 			//左右节点入队列
 			if let left = temp!.left {
 				queue.enqueue(left)
@@ -292,7 +278,6 @@ extension Tree {
 		
 		var queue = Queue<TreeNode>()
 		while !queue.isEmpty {
-		
 			for _ in 0 ..< queue.count {
 				//取出节点、打印、遍历左右节点
 				let node = queue.dequeue()
@@ -313,7 +298,7 @@ extension Tree {
 //MARK: 测试
 
 let items: Array<String> = ["A", "B", "D", "", "", "E", "", "", "C", "","F", "", ""]
-let tree: Tree = Tree(items: items)
+let tree: BinTree = BinTree(items: items)
 tree.preOrderTraversal(tree: tree.root)
 print("\n--------------------------\n")
 tree.inOrderTraversal(tree: tree.root)
