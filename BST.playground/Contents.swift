@@ -208,5 +208,56 @@ class BinarySearchTree {
 }
 
 
-
-
+//class TreeNode {
+//	var data: Int
+//	var left: TreeNode?
+//	var right: TreeNode?
+//	
+//	//节点标志位
+//	var flag: Int = 0
+//	
+//	init(data: Int){
+//		self.data = data
+//	}
+//	
+//}
+//
+//
+//class BST {
+//	var root: TreeNode?
+//	var datas: [Int]?
+//	
+//	init (datas: [Int]) {
+//		self.datas = datas
+//		makeTree()
+//	}
+//	
+//	func makeTree() {
+//		guard let base = datas, base.count > 0 else {
+//			return
+//		}
+//		
+//		root = TreeNode(data: base[0])
+//		
+//		var i = 1 
+//		while i < base.count {
+//			root = insert(node: root, value: base[i])
+//			i += 1
+//		}
+//	}	
+//	
+//	func insert(node: TreeNode?, value: Int) -> TreeNode{
+//		
+//		guard let tree = node else {
+//			return TreeNode(data: value)
+//		}
+//		
+//		if tree.data > value {
+//			tree.left = insert(node: tree.left, value: value)
+//		}else {
+//			tree.right = insert(node: tree.right, value: value)
+//		}
+//		return tree
+//	}
+//	
+//}

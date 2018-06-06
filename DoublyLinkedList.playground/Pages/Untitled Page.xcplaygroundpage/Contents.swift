@@ -188,6 +188,29 @@ extension LinkedList {
             head = currentNode
         }
     }
+	
+
+	
+	/// 单链表翻转
+	///
+	/// - Parameter k: 要反转的节点个数
+	func reverse(k: Int) {
+		guard !isEmpty else{
+			return
+		}
+		var count = 1
+		var newNode = head!.next
+		var oldNode = newNode!.next
+		
+		while count < k {
+			var temp = oldNode?.next
+			oldNode?.next = newNode
+			newNode = oldNode
+			oldNode = temp
+			count += 1
+		}
+		head!.next?.next = oldNode
+	}
 }
 
 
