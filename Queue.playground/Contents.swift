@@ -103,39 +103,40 @@ class QueueNode<T> {
     var next: QueueNode?
     
     init(value: T = "" as! T) {
-        data = value
+        self.data = value
+        self.next = nil
     }
 }
 
 //从front处删除节点， 从rear处插入节点
 class LinkedQueue<T> {
     typealias Node = QueueNode<T>
-
-    //指向队列的头指针
+    //队头部
     var front: Node?
-    //对尾节点
+    //队尾部
     var tail: Node?
     
     init() {
-        front = Node()
-        tail = front
+        tail = nil
+        front = nil
     }
     
     var count: Int {
-        guard var node = front else {
+        guard let fakeFront = front else {
             return 0
         }
         
-        var count = 1
-        while let next = node.next  {
-            node = next
-            count += 1
+        var cur:Node? = fakeFront
+        var tmp = 0
+        while cur != nil {
+            tmp += 1
+            cur = cur!.next
         }
-        return count
+        return tmp
     }
     
     var isEmpty: Bool {
-        return front?.next == nil
+        return front == nil && tail == nil
     }
 }
 
@@ -145,10 +146,12 @@ extension LinkedQueue {
     //从表尾入队
     func enqueue(_ element: T) {
         let node = Node(value: element)
-        tail?.next = node
-        tail = node
         if isEmpty {
-            front?.next = node
+            tail = node
+            front = node
+        }else {
+            tail!.next = node
+            tail = tail!.next
         }
     }
     
@@ -158,15 +161,13 @@ extension LinkedQueue {
             return nil
         }
         
-        let newNode = front?.next
-        front?.next = newNode?.next
-        //释放节点
-        newNode?.next = nil
-        
-        if front?.next == nil {
+        let fakeNode = front!
+        front = fakeNode.next
+
+        if front == nil {
             tail = front //同步尾节点
         }
-        return newNode?.data
+        return fakeNode.data
     }
     
     func dequeueAll() {

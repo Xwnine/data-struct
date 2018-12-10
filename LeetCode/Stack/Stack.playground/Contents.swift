@@ -27,6 +27,12 @@ struct Stack<T> {
         return array.popLast()
     }
     
+    mutating func popToTop() {
+        while !isEmpty {
+            pop()
+        }
+    }
+    
     var top: T? {
         return array.last
     }
@@ -70,6 +76,10 @@ class LinkedStack<T> {
 extension LinkedStack {
     //入栈操作，本质是向链表的头节点插入元素
     func push(data: T) {
+        if isEmpty {
+            top = Node(value: data)
+            return
+        }
         let newNode = Node(value: data)
         newNode.next = top
         top = newNode
